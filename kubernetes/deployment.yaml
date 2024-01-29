@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: counter-service-deployment
+  labels:
+    app: counterservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: counterservice
+  template:
+    metadata:
+      labels:
+        app: counterservice
+    spec:
+      containers:
+      - name: counter-service-test
+        image: counter-service-test
+        env:
+          - name: LISTEN_PORT
+            value: "8081"
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8081
